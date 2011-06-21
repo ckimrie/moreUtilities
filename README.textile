@@ -162,6 +162,8 @@ The category URL title for the category in which to search for the previous entr
 *entry_id*
 The current channel entry ID
 
+
+
 <hr/>
 
 h3. cache_buster
@@ -210,16 +212,53 @@ This technique can be applied to any kind of asset being used by your page.
 On a side note, this works very well when being used with a versioned deployment mechanism such as "Beanstalk":http://beanstalkapp.com coupled with a deployment hook such as our "Beanstalk Web Hook":https://github.com/moresoda/mod.beanstalk-deployment-hook.ee_addon addon. Each deployment will trigger a cache dump, thus forcing browsers to redownload assets the next time they visit.
 
 
+<hr/>
+
+h3. get
+
+Example:
+
+<pre>
+	{exp:moreutilities:get key="address"}
+</pre>
+
+Allows access to sanitised GET variables from within your templates.
+
+h4. Parameters
+
+*key*
+The name of the GET variable you want to display
 
 
+<hr/>
 
 
+h3. post
+
+Example:
+
+<pre>
+	{exp:moreutilities:post key="address"}
+</pre>
+
+Allows access to sanitised POST variables from within your templates.
+
+h4. Parameters
+
+*key*
+The name of the POST variable you want to display
 
 
-
+<hr/>
 
 
 h2. Change log
+
+h4. 1.1
+
+* Added get method
+* Added post method
+
 
 h4. 1.0
 

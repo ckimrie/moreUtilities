@@ -2,7 +2,7 @@
 
 $plugin_info = array(
 						'pi_name'			=> 'moreUtilities',
-						'pi_version'		=> '1.0',
+						'pi_version'		=> '1.1',
 						'pi_author'			=> 'Christopher Imrie',
 						'pi_author_url'		=> 'http://moresoda.co.uk/',
 						'pi_description'	=> 'ExpressionEngine 2.0 utility tags for use in templates.'
@@ -340,6 +340,36 @@ class Moreutilities{
 			write_file(APPPATH."cache/page_cache/cache_buster", $new_time);
 			return "?".$new_time;
 		}
+	}
+	
+	
+	
+	/**
+	 * Allows access to sanitized post data from templates
+	 * 
+	 * @author Christopher Imrie
+	 * Apr 14, 2011
+	 */
+	public function post()
+	{
+
+		$key = $this->EE->TMPL->fetch_param('key');
+
+		return $this->EE->input->post($key, true);
+	}
+
+
+	/**
+	 * Allows access to sanitized Get data from templates
+	 * 
+	 * @author Christopher Imrie
+	 * Apr 14, 2011
+	 */
+	public function get()
+	{
+		$key = $this->EE->TMPL->fetch_param('key');
+
+		return $this->EE->input->get($key, true);
 	}
 }
 
