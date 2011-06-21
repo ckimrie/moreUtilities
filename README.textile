@@ -1,0 +1,223 @@
+!http://moresoda.co.uk/external_assets/github/moresoda-logo.png(moresoda)!:http://moresoda.co.uk
+
+h1. moreUtilities
+
+An ExpressionEngine 2 add-on that provides various utility tags for use in templates.
+
+
+h2. Info
+
+Developed by Moresoda Design Ltd, "http://moresoda.co.uk":http://moresoda.co.uk
+
+h2. Requirements
+
+* ExpressionEngine 2.1.3 +
+
+h2. Browser Compatibility
+
+* Firefox 2+
+* Safari 2+
+* Chrome 3+
+* Opera 9+
+* Internet Explorer 7+
+
+h2. Installation
+
+# Copy the @system/expressionengine/third_party/moreutilities@ folder to your @system/expressionengine/third_party/@ folder.
+
+h2. Template Tags
+
+h3. member_custom_field
+
+Example:
+
+<pre>
+	{exp:moreutilities:member_custom_field member_id="5" field="screen_name"}
+</pre>
+
+Allows you to display any member custom fields in your templates
+
+h4. Parameters
+
+*member_id*
+The ID of the member whose information you want to display
+
+*field*
+The custom member field name you would like to display.
+
+
+
+h3. member_id_to_name
+
+Example:
+
+<pre>
+	{exp:moreutilities:member_id_to_name member_id="5"}
+</pre>
+
+Returns the screen name for a given member ID.
+
+
+
+
+
+
+h3. category_url_to_id
+
+Example:
+
+<pre>
+	<!-- Manually Specify -->
+	{exp:moreutilities:category_url_to_id cat_url_title="how_to_articles" }
+	
+	<!-- Dynamically Specify -->
+	{exp:moreutilities:category_url_to_id cat_url_title="{segment_3}" }
+</pre>
+
+Returns the category ID for a given category URL title.
+
+h4. Parameters
+
+*cat_url_title*
+The URL title of a category to convert into an ID.
+
+
+
+
+h3. last_segment_to_cat_id
+
+Example:
+
+<pre>
+	{exp:moreutilities:last_segment_to_cat_id}
+</pre>
+
+Convenience function, identical to _category_url_to_id_, except that it will automatically use the last segment of the current URL as the category URL title.
+
+
+
+h3. cat_url_to_name
+
+Example:
+
+<pre>
+	<!-- Manually Specify -->
+	{exp:moreutilities:cat_url_to_name cat_url_title="how_to_articles"}
+	
+	<!-- Dynamically Specify -->
+	{exp:moreutilities:cat_url_to_name cat_url_title="{segment_3}"}
+</pre>
+
+Returns the category name for a given category URL title.
+
+h4. Parameters
+
+*cat_url_title*
+The URL title of a category to convert into a name.
+
+
+
+
+
+h3. next_entry_url_title
+
+Example:
+
+<pre>
+	{exp:moreutilities:next_entry_url_title cat_url_title="{segment_3}" entry_id="61"}
+</pre>
+
+Return the URL title for the next entry in the same channel _and_ the same category. Very useful if you are using categories on templates where the channel entries tag has @dynamic="off"@, but you want to enable next/previous entry linking.
+
+h4. Parameters
+
+*cat_url_title*
+The category URL title for the category in which to search for the previous entry
+
+*entry_id*
+The current channel entry ID
+
+
+
+
+
+h3. prev_entry_url_title
+
+Example:
+
+<pre>
+	{exp:moreutilities:prev_entry_url_title cat_url_title="{segment_3}" entry_id="61"}
+</pre>
+
+Return the URL title for the previous entry in the same channel _and_ the same category. Very useful if you are using categories on templates where the channel entries tag has @dynamic="off"@, but you want to enable next/previous entry linking.
+
+h4. Parameters
+
+*cat_url_title*
+The category URL title for the category in which to search for the previous entry
+
+*entry_id*
+The current channel entry ID
+
+
+
+h3. cache_buster
+
+Example:
+
+<pre>
+	<script src="/path/to/global/script.js{exp:moreutilities:cache_buster}" type="text/javascript"></script>
+	<link href="/path/to/global/styles.css{exp:moreutilities:cache_buster}" type="text/css" rel="stylesheet"></script>
+	
+	<!-- Produces: -->
+	<script src="/path/to/global/script.js?1265247835" type="text/javascript"></script>
+	<link href="/path/to/global/styles.css?1265247835" type="text/css" rel="stylesheet"></script>
+</pre>
+
+Allows you to take safely take advantage of browser caching for site assets such as CSS, JS, and image files, by being able to force visiting browsers to refresh their cache when they are updated.  
+
+The cache buster creates a timestamp you can use in your templates that is stored in the ExpressionEngine page cache.  This means that once created, the timestamp remains the same as the user navigates around the site, and hence if the correct HTTP headers are being used for assets (see below) the browser will load the assets from it's cache, dramatically decreasing the page load speed
+
+If you update your CSS or JS files, simply empty the ExpressionEngine cache.  This will delete the cache_buster timestamp, and force it to generate a new one.  When browsers next visit the site with cached assets, the link to those assets will have changed due to the new timestamp that has been appended, and hence they will re download your newly updated assets!
+
+
+The cache buster only works correctly on pages that have page caching enabled.  If caching is disabled/refreshed then the browser will redownload the assets for each subsequent page where caching has not been enabled. 
+
+To take advantage of this for static assets you can place something similar to this in your .htaccess file (From HTML5 Boilerplate):
+
+<pre>
+<!-- EXAMPLE -->
+<IfModule mod_expires.c>
+	ExpiresActive on
+
+	ExpiresDefault                          "access plus 1 month"
+	ExpiresByType text/css                  "access plus 2 months"
+	ExpiresByType application/javascript    "access plus 2 months"
+	ExpiresByType text/javascript           "access plus 2 months"
+	
+	<IfModule mod_headers.c>
+		Header append Cache-Control "public"
+	</IfModule>
+
+</IfModule>
+</pre>
+
+This technique can be applied to any kind of asset being used by your page.
+
+On a side note, this works very well when being used with a versioned deployment mechanism such as "Beanstalk":http://beanstalkapp.com coupled with a deployment hook such as our "Beanstalk Web Hook":https://github.com/moresoda/mod.beanstalk-deployment-hook.ee_addon addon. Each deployment will trigger a cache dump, thus forcing browsers to redownload assets the next time they visit.
+
+
+
+
+
+
+
+
+
+
+
+h2. Change log
+
+h4. 1.0
+
+* Public release
