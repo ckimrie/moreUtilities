@@ -249,7 +249,6 @@ h4. Parameters
 The name of the POST variable you want to display
 
 
-<hr/>
 
 
 h2. Change log
