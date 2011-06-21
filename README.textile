@@ -27,6 +27,9 @@ h2. Installation
 
 h2. Template Tags
 
+
+<hr/>
+
 h3. member_custom_field
 
 Example:
@@ -45,7 +48,7 @@ The ID of the member whose information you want to display
 *field*
 The custom member field name you would like to display.
 
-
+<hr/>
 
 h3. member_id_to_name
 
@@ -60,7 +63,7 @@ Returns the screen name for a given member ID.
 
 
 
-
+<hr/>
 
 h3. category_url_to_id
 
@@ -82,7 +85,7 @@ h4. Parameters
 The URL title of a category to convert into an ID.
 
 
-
+<hr/>
 
 h3. last_segment_to_cat_id
 
@@ -94,7 +97,7 @@ Example:
 
 Convenience function, identical to _category_url_to_id_, except that it will automatically use the last segment of the current URL as the category URL title.
 
-
+<hr/>
 
 h3. cat_url_to_name
 
@@ -117,7 +120,7 @@ The URL title of a category to convert into a name.
 
 
 
-
+<hr/>
 
 h3. next_entry_url_title
 
@@ -139,7 +142,7 @@ The current channel entry ID
 
 
 
-
+<hr/>
 
 h3. prev_entry_url_title
 
@@ -159,7 +162,7 @@ The category URL title for the category in which to search for the previous entr
 *entry_id*
 The current channel entry ID
 
-
+<hr/>
 
 h3. cache_buster
 
